@@ -19,21 +19,20 @@ const markup = galleryItems.map((item) => `<div class="gallery__item">
 gallery.insertAdjacentHTML("beforeend", markup);
 
 import SimpleLightbox from "simplelightbox";
-
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 let instance = new SimpleLightbox('.gallery a', {'captionsData': 'alt', 'captionPosition': 'bottom', 'captionDelay': 250});
-  instance.close(); 
+  // instance.close(); 
 
-  gallery.addEventListener("click", (event) => {
-  event.preventDefault();
-  const original = event.target;
+//   gallery.addEventListener("click", (event) => {
+//   event.preventDefault();
+//   const original = event.target;
 
-  if (original === gallery) {
-    return;
-  };
+//   if (original === gallery) {
+//     return;
+//   };
 
-// let instance = new SimpleLightbox('.gallery a', {'captionsData': 'alt', 'captionPosition': 'bottom', 'captionDelay': 250});
-  instance.open(); 
+// // let instance = new SimpleLightbox('.gallery a', {'captionsData': 'alt', 'captionPosition': 'bottom', 'captionDelay': 250});
+//   instance.open(); 
   
-});
+// });
