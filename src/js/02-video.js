@@ -1,3 +1,5 @@
+import throttle from "lodash.throttle";
+
 const iframe = document.querySelector('#vimeo-player');
 const player = new Vimeo.Player(iframe);
 
@@ -5,30 +7,16 @@ player.on('play', function() {
         console.log('played the video!');
     });
 
-player.on('timeupdate', _.throttle(function(data) {
-    // data is an object containing properties specific to that event
+player.on('timeupdate', throttle(function(data) {
     let time = 0;
     time += data.seconds;
-    console.log(time);
-    localStorage.setItem("videoplayer-current-time", time);
-}, 1000));
+    
+    localStorage.setItem("videoplayer-current-time", JSON.stringify(time));
+},
+1000));
 
-// player.getCurrentTime().then(function(seconds) {
-//     // seconds = the current playback position
-// }).catch(function(error) {
-//     // an error occurred
-// });
+const secondsJSON = localStorage.getItem("videoplayer-current-time");
+const parsedSec = JSON.parse(secondsJSON);
+console.log(parsedSec);
 
-// var throttle = require('lodash.throttle');
-
-// const thr = _.throttle(() => {
-//     console.log("Scroll handler call every 300ms");
-// }, 300);
-// console.log(thr);
-
-// document.addEventListener(
-//   "scroll",
-//   _.throttle(() => {
-//     console.log("Scroll handler call every 300ms");
-//   }, 300)
-// );
+player.setCurrentTime(parsedSec || 0);
