@@ -9,12 +9,16 @@ email.value = storageElem ? storageElem.email : "";
 message.value = storageElem ? storageElem.message : "";
 
 function inputFunction(event) {
-        const { name, value } = event.target;
+    const {
+        elements: {email, message}
+    } = event.currentTarget;
+    // const { name, value } = event.target;
     
-    const data = JSON.parse(localStorage.getItem("feedback-form-state")) || {};
+    // const data = JSON.parse(localStorage.getItem("feedback-form-state")) || {};
     const object = {
-        ...data, [name]: value,
-        
+        email: email.value,
+        message: message.value,
+        // ...data, [name]: value,
     }
     
     localStorage.setItem("feedback-form-state", JSON.stringify(object));
